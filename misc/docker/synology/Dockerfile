@@ -30,7 +30,7 @@ ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
 
 RUN mkdir -p "$GOPATH/src" "$GOPATH/bin" && chmod -R 777 "$GOPATH"
 WORKDIR $GOPATH/src
-RUN git clone https://perkeep.googlesource.com/perkeep perkeep.org
+RUN git clone https://github.com/perkeep/perkeep.git perkeep.org
 WORKDIR $GOPATH/src/perkeep.org
 RUN git reset --hard $perkeep_version
 
