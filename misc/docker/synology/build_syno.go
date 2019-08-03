@@ -28,9 +28,9 @@ import (
 
 var (
 	// TODO(mpl): include more arches.
-	flagArch       = flag.String("arch", "x64", "Synology architecture to build for. Possible values are limited to x64 or 6281 for now.")
+	flagArch       = flag.String("arch", "x64", "Synology architecture to build for. Possible values are limited to x64 or 6281 or armadaxp for now.")
 	flagDsm        = flag.String("dsm", "6.2", "DSM version to build for.")
-	flagPerkeepRev = flag.String("pkrev", "8b537a66307cf41a659786f1a898c77b46303601", "git revision of Perkeep to package")
+	flagPerkeepRev = flag.String("pkrev", "c9f78d02adf9740f3b8d403a1418554293cc9f41", "git revision of Perkeep to package")
 	flagNoCache    = flag.Bool("nocache", false, "build docker image with --no-cache")
 )
 
@@ -38,7 +38,7 @@ var pwd string
 
 func main() {
 	flag.Parse()
-	if *flagArch != "x64" && *flagArch != "6281" {
+	if *flagArch != "x64" && *flagArch != "6281" && *flagArch != "armadaxp" {
 		log.Fatalf("unsupported architecture: %v", *flagArch)
 	}
 
@@ -56,7 +56,7 @@ func main() {
 	goarch := "amd64"
 	// TODO(mpl): figure out the correspondance between all the other arches and the
 	// values for the go vars.
-	if *flagArch == "6281" {
+	if *flagArch == "6281" || *flagArch == "armadaxp" {
 		gobin = "/go/bin/linux_arm"
 		goarch = "arm"
 	}
